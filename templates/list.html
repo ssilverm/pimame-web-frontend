@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+      
+	{% block content %}
+      <div class="starter-template">
+        <h1>{{name}}</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      </div>
+        <p>
+          {% for d in data['menu_items'] %}
+            <p><a href="{{ url_for('list_files', system_label = d['label']) }}" > {{d['label']}} - {{d['roms']}} </a></p>
+          {% endfor %}
+        </p>
+
+
+    {% endblock %}

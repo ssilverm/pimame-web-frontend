@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+      
+	{% block content %}
+    <style>
+      @import "/static/css/demo_table.css";
+
+      #dropbox{
+          border: 1px solid grey;
+        border-radius: 3px;
+        position: relative;
+        margin: 80px auto 90px;
+        min-height: 290px;
+        overflow: hidden;
+        padding-bottom: 40px;
+          width: 990px;
+      }
+
+
+      #dropbox .message{
+        font-size: 11px;
+          text-align: center;
+          padding-top: 160px;
+          display: block;
+      }
+
+      #dropbox:before{
+        border-radius: 3px 3px 0 0;
+      }
+
+      #dropbox .preview{
+        width: 245px;
+        height: 215px;
+        float: left;
+        margin: 55px 0 0 60px;
+        position: relative;
+        text-align: center;
+      }
+
+      #dropbox .preview img{
+        max-width: 240px;
+        max-height: 180px;
+        border: 3px solid #fff;
+        display: block;
+        box-shadow: 0 0 2px #000;
+      }
+
+      #dropbox .imageHolder{
+        display: inline-block;
+        position: relative;
+      }
+
+      #dropbox .uploaded{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url('../img/done.png') no-repeat center center rgba(255,255,255,0.5);
+        display: none;
+      }
+
+      #dropbox .preview.done .uploaded{
+        display: block;
+      }
+
+      #dropbox .progressHolder{
+        position: absolute;
+        background-color:#252f38;
+        height: 12px;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        box-shadow: 0 0 2px #000;
+      }
+
+      #dropbox .progress{
+        background-color:#2586d0;
+        position: absolute;
+        height: 100%;
+        left: 0;
+        width: 0;
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.4) inset;
+        -moz-transition: 0.25s;
+        -webkit-transition: 0.25s;
+        -o-transition: 0.25s;
+        transition: 0.25s;
+      }
+
+      #dropbox .preview.done .progress{
+        width: 100% !important;
+      }
+    </style>
+
+
+
+      <h1>{{ system_label }} Rom Manager</h1>
+
+
+      <div id="dropbox">
+        <span class="message">Drop files here to upload.</span>
+      </div>
+
+        <p>
+          {% if files %}
+            <!--<p>
+              <a href="{{ url_for('upload_files', system_label = system_label) }}" >UPLOAD FILES </a>
+            </p> -->
+            <table id="roar" class="display" >
+              <thead>
+                <tr>
+                  <td>File Name</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% for f in files %}
+                  <tr><td>{{f}}</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          
+          {% else %}
+            <p>Something went wrong.</p>
+          {% endif %}
+
+    {% endblock %}
+
+    {% block script %}
+    <script>
+        var path = '{{ system_path }}';
+    </script>
+    <script type="text/javascript" src="/static/js/jquery.filedrop.js"></script>
+    <script type="text/javascript" src="/static/js/upload.js"></script>
+    <script src="/static/js/jquery.dataTables.js"></script>
+
+    <script>
+      $(document).ready(function() {
+          $('#roar').dataTable();
+      } );
+    </script>
+
+    {% endblock %}
