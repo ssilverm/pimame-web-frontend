@@ -104,7 +104,7 @@ def upload_files(system_label):
 
 @app.route("/tools", methods=['POST','GET'] )
 def tools():
-    return render_template("tools.html", msg = msg)
+    return render_template("tools.html")
 
 
 @app.route("/tools/<power>", methods=['POST','GET'] )
