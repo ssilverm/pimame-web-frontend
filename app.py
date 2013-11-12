@@ -115,7 +115,7 @@ def power(power):
     elif power == "shutdown":
         command = "sudo poweroff"
         msg = "Powering off your system now."
-    else
+    else:
         msg = "Not a valid command."
         return render_template("tools.html", msg = msg)
 
