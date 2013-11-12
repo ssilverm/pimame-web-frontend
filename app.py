@@ -106,13 +106,21 @@ def upload_files(system_label):
 def power(power):
     if power == "reboot":
         command = "sudo reboot"
-    if power == "shutdown":
+        msg = "Rebooting your system now."
+    elif power == "shutdown":
         command = "sudo poweroff"
+        msg = "Powering off your system now."
+    else
+        msg = "Not a valid command."
+        return render_template("tools.html", msg = msg)
+
 
     import subprocess
     process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
     output = process.communicate()[0]
     print output
+    return render_template("tools.html", msg = msg)
+
 
 
 
