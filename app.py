@@ -102,9 +102,17 @@ def upload_files(system_label):
 
     return render_template("upload.html", system_path = "/upload/" + system_label)
 
+@app.route("/tools/<power>", methods=['POST','GET'] )
+def power(power):
+    if power == "reboot":
+        command = "sudo reboot"
+    if power == "shutdown":
+        command = "sudo poweroff"
 
-
-
+    import subprocess
+    process = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
+    output = process.communicate()[0]
+    print output
 
 
 
