@@ -102,6 +102,11 @@ def upload_files(system_label):
 
     return render_template("upload.html", system_path = "/upload/" + system_label)
 
+@app.route("/tools", methods=['POST','GET'] )
+def tools():
+    return render_template("tools.html", msg = msg)
+
+
 @app.route("/tools/<power>", methods=['POST','GET'] )
 def power(power):
     if power == "reboot":
