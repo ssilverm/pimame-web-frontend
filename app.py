@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip', 'smc', 'n64', 'gen']
+ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip', 'smc', 'n64', 'gen', 'v64', 'bin', 'smd']
 
 
 document = """
@@ -35,6 +35,18 @@ menu_items:
    visible: Yes
    icon_file: pygame_tiny.gif
    roms: /home/pi/roms/nes/
+   command: ifconfig #/home/emulators/dgen/dgen %rom
+
+ - label: Genesis
+   visible: Yes
+   icon_file: pygame_tiny.gif
+   roms: /home/pi/roms/genesis/
+   command: ifconfig #/home/emulators/dgen/dgen %rom
+
+ - label: N64
+   visible: Yes
+   icon_file: pygame_tiny.gif
+   roms: /home/pi/roms/n64/
    command: ifconfig #/home/emulators/dgen/dgen %rom
 """
 
