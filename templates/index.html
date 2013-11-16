@@ -2,10 +2,18 @@
       
 	{% block content %}
       <div class="starter-template">
-        <h1>Pimame Uploader!</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-        
-        <h1><a class="btn btn-primary btn-lg" href="{{url_for('rom')}}">ROM Uploader</a></h1>
+        <!-- <div class="jumbotron"> -->
+          <h1>Pimame Remote Manager</h1>
+          <div class="bs-callout bs-callout-info">
+            <h4>Welcome to the Pimame Remote Manager</h4>
+            <p>Select one of the options below to remotely manage your PiMAME installation.</p>
+          </div>
+          <!-- <p class="lead">Welcome to the Pimame Remote Manager. <br> Select one of the options below to remotely manage your PiMAME installation.</p> -->
+          
+          <a class="btn btn-primary btn-lg" href="{{url_for('rom')}}"><i class="glyphicon glyphicon-upload"></i> ROM Uploader</a>
+          <a class="btn btn-primary btn-lg" href="{{url_for('tools')}}"><i class="glyphicon glyphicon-wrench"></i> Tools</a>
+        <!-- </div> -->
+
       </div>
 
 
