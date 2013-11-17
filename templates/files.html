@@ -13,7 +13,7 @@
 
         <p>
           {% if files %}
-          
+
             <table class="table--rom_list table table-striped table-hover">
               <thead>
                 <tr>
@@ -28,7 +28,9 @@
             </table>
 
           {% else %}
-            <p>No roms exist for this emulator.</p>
+          <div class="alert alert-warning">
+            <p><strong>No roms exist for this emulator - better get uploadin', playa!</strong></p>
+          </div>
           {% endif %}
 
     {% endblock %}
