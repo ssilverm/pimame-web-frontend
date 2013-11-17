@@ -2,8 +2,11 @@
       
 	{% block content %}
       <div class="starter-template">
-        <h1>{{name}}</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <h1>ROM Uploader</h1>
+        <div class="bs-callout bs-callout-info">
+          <h4>Select a platform to upload a ROM</h4>
+          <p>Select the platform you want to upload roms for, then drag them into the box.</p>
+        </div>
       </div>
         <p>
           {% for d in data['menu_items'] %}
