@@ -182,15 +182,15 @@ table.display td.center {
  */
 
 .sorting_asc {
-	background: url('../images/sort_asc.png') no-repeat center right;
+	background: url('/static/img/sort_asc.png') no-repeat center right;
 }
 
 .sorting_desc {
-	background: url('../images/sort_desc.png') no-repeat center right;
+	background: url('/static/img/sort_desc.png') no-repeat center right;
 }
 
 .sorting {
-	background: url('../images/sort_both.png') no-repeat center right;
+	background: url('/static/img/sort_both.png') no-repeat center right;
 }
 
 .sorting_asc_disabled {
@@ -212,7 +212,7 @@ table.display thead td:active {
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * DataTables row classes
  */
-table.display tr.odd.gradeA {
+/*table.display tr.odd.gradeA {
 	background-color: #ddffdd;
 }
 
@@ -251,7 +251,7 @@ tr.odd {
 
 tr.even {
 	background-color: white;
-}
+}*/
 
 
 
@@ -365,7 +365,7 @@ table.display tr.odd.row_selected td {
  * Sorting classes for columns
  */
 /* For the standard odd/even */
-tr.odd td.sorting_1 {
+/*tr.odd td.sorting_1 {
 	background-color: #D3D6FF;
 }
 
@@ -387,7 +387,7 @@ tr.even td.sorting_2 {
 
 tr.even td.sorting_3 {
 	background-color: #F9F9FF;
-}
+}*/
 
 
 /* For the Conditional-CSS grading rows */
@@ -400,7 +400,7 @@ tr.even td.sorting_3 {
 	  dd > d1
 	  ee > e2
  */
-tr.odd.gradeA td.sorting_1 {
+/*tr.odd.gradeA td.sorting_1 {
 	background-color: #c4ffc4;
 }
 
@@ -495,12 +495,12 @@ tr.even.gradeU td.sorting_2 {
 tr.even.gradeU td.sorting_3 {
 	background-color: #e2e2e2;
 }
-
+*/
 
 /*
  * Row highlighting example
  */
-.ex_highlight #example tbody tr.even:hover, #example tbody tr.even td.highlighted {
+/*.ex_highlight #example tbody tr.even:hover, #example tbody tr.even td.highlighted {
 	background-color: #ECFFB3;
 }
 
@@ -539,7 +539,7 @@ tr.even.gradeU td.sorting_3 {
 .ex_highlight_row #example tr.odd:hover td.sorting_3 {
 	background-color: #DBFF70;
 }
-
+*/
 
 /*
  * KeyTable

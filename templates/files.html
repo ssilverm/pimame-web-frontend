@@ -3,25 +3,21 @@
 	{% block content %}
     <style>
       @import "/static/css/demo_table.css";
-      @import "/static/css/dropbox.css";
+      @import "/static/css/dropzone/basic.css";
+      @import "/static/css/dropzone/dropzone.css";
     </style>
 
       <h1>{{ system_label }} Rom Manager</h1>
 
-
-      <div id="dropbox">
-        <span class="message">Drop files here to upload.</span>
-      </div>
+        <form id="my-awesome-dropzone" action="{{system_path}}" method="post" class="dropzone"></form>
 
         <p>
           {% if files %}
-            <!--<p>
-              <a href="{{ url_for('upload_files', system_label = system_label) }}" >UPLOAD FILES </a>
-            </p> -->
-            <table id="roar" class="display" >
+
+            <table class="table--rom_list table table-striped table-hover">
               <thead>
                 <tr>
-                  <td>File Name</td>
+                  <th>File Name</th>
                 </tr>
               </thead>
               <tbody>
@@ -30,24 +26,23 @@
                 {% endfor %}
               </tbody>
             </table>
-          
+
           {% else %}
-            <p>Something went wrong.</p>
+          <div class="alert alert-warning">
+            <p><strong>No roms exist for this emulator - better get uploadin', playa!</strong></p>
+          </div>
           {% endif %}
 
     {% endblock %}
 
     {% block script %}
-    <script>
-        var path = '{{ system_path }}';
-    </script>
-    <script type="text/javascript" src="/static/js/jquery.filedrop.js"></script>
-    <script type="text/javascript" src="/static/js/upload.js"></script>
+
+    <script src="/static/js/dropzone.js"></script>
     <script src="/static/js/jquery.dataTables.js"></script>
 
     <script>
       $(document).ready(function() {
-          $('#roar').dataTable();
+          $('.table--rom_list').dataTable();
       } );
     </script>
 
