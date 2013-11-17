@@ -19,10 +19,16 @@ options:
  selection_color: "0,255,0"
  item_color: "255,255,255"
 menu_items:
+ - label: Test
+   visible: Yes
+   icon_file: pygame_tiny.gif
+   roms: upload/
+   command: ifconfig #/home/emulators/dgen/dgen %rom
+
  - label: PlayStation
    visible: Yes
    icon_file: pygame_tiny.gif
-   roms: /Users/ssilverm/dev/upload-test/
+   roms: /home/pi/roms/psx/
    command: ifconfig #/home/emulators/dgen/dgen %rom
 
  - label: SNES
