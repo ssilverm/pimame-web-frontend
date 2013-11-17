@@ -13,3 +13,4 @@ This is the front end for the PiMAME remote management site.
 - Refresh table view on successful upload and highlight item in table for 2-3 seconds via `.success` class.
 - Add automated tests for testing upload feature
 - Add delete file feature
+- Ignore DS_Store from table file view 
