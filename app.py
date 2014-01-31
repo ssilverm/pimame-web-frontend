@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip', 'smc', 'n64', 'gen', 'v64', 'bin', 'smd']
 
-
+#not using
 document = """
 options:
  num_items_per_row: 4
@@ -55,7 +55,8 @@ menu_items:
    roms: /home/pi/roms/n64/
    command: ifconfig #/home/emulators/dgen/dgen %rom
 """
-
+#not using above
+document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
 #print yaml.dump(yaml.load(document))
 
 @app.route("/")
@@ -156,4 +157,4 @@ if __name__ == '__main__':
     if 'DEBUG' in os.environ:
         app.debug = True
     app.debug = True
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=80)
