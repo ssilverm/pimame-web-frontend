@@ -7,61 +7,14 @@ app = Flask(__name__)
 
 ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip', 'smc', 'n64', 'gen', 'v64', 'bin', 'smd']
 
-#not using
-document = """
-options:
- num_items_per_row: 4
- resolution: "640,480"
- item_height: 100
- padding: 10
- selection_size: 4
- background_color: "200,200,200"
- selection_color: "0,255,0"
- item_color: "255,255,255"
-menu_items:
- - label: Test
-   visible: Yes
-   icon_file: pygame_tiny.gif
-   roms: upload/
-   command: ifconfig #/home/emulators/dgen/dgen %rom
-
- - label: PlayStation
-   visible: Yes
-   icon_file: pygame_tiny.gif
-   roms: /home/pi/roms/psx/
-   command: ifconfig #/home/emulators/dgen/dgen %rom
-
- - label: SNES
-   visible: Yes
-   icon_file: pygame_tiny.gif
-   roms: /home/pi/roms/snes/
-   command: ls #/home/emulators/dgen/dgen %rom
-
- - label: NES
-   visible: Yes
-   icon_file: pygame_tiny.gif
-   roms: /home/pi/roms/nes/
-   command: ifconfig #/home/emulators/dgen/dgen %rom
-
- - label: Genesis
-   visible: Yes
-   icon_file: pygame_tiny.gif
-   roms: /home/pi/roms/genesis/
-   command: ifconfig #/home/emulators/dgen/dgen %rom
-
- - label: N64
-   visible: Yes
-   icon_file: pygame_tiny.gif
-   roms: /home/pi/roms/n64/
-   command: ifconfig #/home/emulators/dgen/dgen %rom
-"""
-#not using above
 document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
 #print yaml.dump(yaml.load(document))
 
 @app.route("/")
 def hello():
     name = "Hello World!"
+    document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
+
     data = yaml.load(document)
 
     return render_template('index.html', name=name, data=data)
@@ -69,12 +22,17 @@ def hello():
 @app.route("/rom")
 def rom():
     name = "Hello World!"
+    document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
+
     data = yaml.load(document)
+    print data
     return render_template('list.html', name=name, data=data)
 
 @app.route("/system/<system_label>")
 def list_files(system_label):
     name = "Hello World!"
+    document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
+
     data = yaml.load(document)
     system_data = 0
 
@@ -99,6 +57,7 @@ def list_files(system_label):
 def upload_files(system_label):
     #return "hi"
     name = "Hello World!"
+    document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
     data = yaml.load(document)
     system_data = 0
 
