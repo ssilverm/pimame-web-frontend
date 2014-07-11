@@ -106,6 +106,16 @@ def power(power):
 
 
 
+@app.route("/ks")
+def kickstarter():
+    name = "Kickstarter!"
+    document = open('/home/pi/pimame/pimame-menu/ks.yaml')
+
+    data = yaml.load(document)
+    print data
+    return render_template('ks_list.html', name=name, data=data)
+
+
 
 
 def allowed_file(filename):
