@@ -2,8 +2,119 @@ from datetime import datetime
 from flask import Flask, render_template, jsonify, redirect, url_for, request
 import yaml
 import os
+from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.admin import Admin
+from flask.ext.admin.contrib.sqla import ModelView
+
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
+app.config['SQLALCHEMY_BINDS'] = {
+    'config':        'sqlite:///config.db',
+    'games':      'sqlite:///games_master.db'
+}
+
+
+
+# Flask and Flask-SQLAlchemy initialization here
+
+# class User(db.Model):
+#     __bind_key__ = 'users'
+#     id = db.Column(db.Integer, primary_key=True)
+#     username = db.Column(db.String(80), unique=True)
+
+
+db = SQLAlchemy(app)
+
+
+
+class KickstarterBackers(db.Model):
+     __tablename__ = 'kickstarter_backers'
+     __bind_key__ = 'config'
+     id = db.Column(db.Integer, primary_key=True)
+     name = db.Column(db.Text)
+
+class MenuItems(db.Model):
+    __tablename__ = 'menu_items'
+    __bind_key__ = 'config'
+    id = db.Column(db.Integer, primary_key=True)
+    label = db.Column(db.Text)
+    icon_id = db.Column(db.Text)
+    type = db.Column(db.Text)
+    visible = db.Column(db.Integer)
+    command = db.Column(db.Text)
+    rom_path = db.Column(db.Text)
+    include_full_path = db.Column(db.Integer)
+    include_extension = db.Column(db.Integer)
+    override_menu = db.Column(db.Integer)
+    icon_file = db.Column(db.Text)
+    icon_selected = db.Column(db.Text)
+    position = db.Column(db.Text)
+    scraper_id = db.Column(db.Text)
+
+class Options(db.Model):
+    __tablename__ = 'options'
+    __bind_key__ = 'config'
+    id = db.Column(db.Integer, primary_key=True)
+    max_fps = db.Column(db.Integer)
+    show_ip = db.Column(db.Integer)
+    show_update = db.Column(db.Integer)
+    sort_items_alphanum = db.Column(db.Integer)
+    sort_items_with_roms_first = db.Column(db.Integer)
+    hide_emulators_with_no_roms = db.Column(db.Integer)
+    hide_system_tools = db.Column(db.Integer)
+    show_cursor = db.Column(db.Integer)
+    allow_quit_to_console = db.Column(db.Integer)
+    use_scene_transitions = db.Column(db.Integer)
+    default_music_volume = db.Column(db.Float)
+    theme_pack = db.Column(db.Text)
+    resolution = db.Column(db.Text)    
+    fullscreen = db.Column(db.Integer) 
+    show_rom_clones = db.Column(db.Integer) 
+    show_unmatched_roms = db.Column(db.Integer) 
+    sort_roms_by = db.Column(db.Text) 
+    rom_sort_order = db.Column(db.Text) 
+    filter_roms_by = db.Column(db.Text) 
+    change_log = db.Column(db.Text) 
+    first_run = db.Column(db.Integer) 
+
+class LocalRoms(db.Model):
+    __tablename__ = 'local_roms'
+    id = db.Column(db.Integer, primary_key=True)
+    system = db.Column(db.Integer)
+    title = db.Column(db.Integer)
+    search_terms = db.Column(db.Text)
+    parent = db.Column(db.Text)
+    cloneof = db.Column(db.Text)
+    release_date = db.Column(db.Text)
+    overview = db.Column(db.Text)
+    esrb = db.Column(db.Text)
+    genres = db.Column(db.Text)
+    players = db.Column(db.Text)
+    coop = db.Column(db.Text)
+    publisher = db.Column(db.Text)
+    developer = db.Column(db.Text)    
+    rating = db.Column(db.Float) 
+    command = db.Column(db.Text) 
+    rom_file = db.Column(db.Text) 
+    rom_path = db.Column(db.Text) 
+    image_file = db.Column(db.Text) 
+    flags = db.Column(db.Text) 
+    number_of_runs = db.Column(db.Integer) 
+
+class CustomModelView(ModelView):
+    edit_template = 'my_edit_template.html'
+    create_template = 'my_create_template.html'
+    list_template = 'my_list_template.html'
+
+
+
+admin = Admin(app, base_template='base_admin.html')
+admin.add_view(CustomModelView(MenuItems, db.session))
+admin.add_view(CustomModelView(Options, db.session))
+admin.add_view(CustomModelView(KickstarterBackers, db.session))
+admin.add_view(CustomModelView(LocalRoms, db.session))
 
 ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip', 'smc', 
 		      'n64', 'gen', 'v64', 'bin', 'smd', 'SMC', 'GEN', 
