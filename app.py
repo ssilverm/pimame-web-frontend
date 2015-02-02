@@ -16,7 +16,7 @@ app.config['SQLALCHEMY_BINDS'] = {
 }
 
 
-
+app.config['SECRET_KEY'] = 'jdhq7864r8uihblk'
 # Flask and Flask-SQLAlchemy initialization here
 
 # class User(db.Model):
@@ -30,10 +30,13 @@ db = SQLAlchemy(app)
 
 
 class KickstarterBackers(db.Model):
-     __tablename__ = 'kickstarter_backers'
-     __bind_key__ = 'config'
-     id = db.Column(db.Integer, primary_key=True)
-     name = db.Column(db.Text)
+    __tablename__ = 'kickstarter_backers'
+    __bind_key__ = 'config'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.Text)
+    
+    def __unicode__(self):
+        return self.name
 
 class MenuItems(db.Model):
     __tablename__ = 'menu_items'
@@ -52,6 +55,9 @@ class MenuItems(db.Model):
     icon_selected = db.Column(db.Text)
     position = db.Column(db.Text)
     scraper_id = db.Column(db.Text)
+
+    def __unicode__(self):
+        return self.label
 
 class Options(db.Model):
     __tablename__ = 'options'
@@ -77,13 +83,16 @@ class Options(db.Model):
     rom_sort_order = db.Column(db.Text) 
     filter_roms_by = db.Column(db.Text) 
     change_log = db.Column(db.Text) 
-    first_run = db.Column(db.Integer) 
+    first_run = db.Column(db.Integer)
+
+    def __unicode__(self):
+        return self.id 
 
 class LocalRoms(db.Model):
     __tablename__ = 'local_roms'
     id = db.Column(db.Integer, primary_key=True)
     system = db.Column(db.Integer)
-    title = db.Column(db.Integer)
+    title = db.Column(db.Text)
     search_terms = db.Column(db.Text)
     parent = db.Column(db.Text)
     cloneof = db.Column(db.Text)
@@ -99,18 +108,25 @@ class LocalRoms(db.Model):
     command = db.Column(db.Text) 
     rom_file = db.Column(db.Text) 
     rom_path = db.Column(db.Text) 
-    image_file = db.Column(db.Text) 
+    image_file = db.Column(db.Text)
     flags = db.Column(db.Text) 
     number_of_runs = db.Column(db.Integer) 
 
+    def __unicode__(self):
+        return self.title
+
 class CustomModelView(ModelView):
-    edit_template = 'my_edit_template.html'
-    create_template = 'my_create_template.html'
-    list_template = 'my_list_template.html'
+    edit_template = 'edit_admin.html'
+    create_template = 'create_admin.html'
+    list_template = 'list_admin.html'
+
+class LocalRomsAdmin(CustomModelView):
+    column_searchable_list = ('title')
+    column_filters = ('title')
 
 
-
-admin = Admin(app, base_template='base_admin.html')
+admin = Admin(app, 'PiPLAY DB Interface', base_template='layout.html', template_mode='bootstrap3')
+#admin = Admin(app, base_template='base_admin.html')
 admin.add_view(CustomModelView(MenuItems, db.session))
 admin.add_view(CustomModelView(Options, db.session))
 admin.add_view(CustomModelView(KickstarterBackers, db.session))
