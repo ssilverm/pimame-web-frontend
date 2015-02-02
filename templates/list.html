@@ -9,8 +9,10 @@
         </div>
       </div>
         <p>
-          {% for d in data['menu_items'] %}
-            <p><a href="{{ url_for('list_files', system_label = d['label']) }}" > <span class="label label-primary">{{d['label']}}</span> - {{d['roms']}} </a></p>
+          {% for d in data %}
+            {% if d.rom_path and d.label != 'Favorites' %}
+              <p><a href="{{ url_for('list_files', system_label = d.label) }}" > <span class="label label-primary">{{d.label}}</span> - {{d.rom_path}} </a></p>
+            {% endif %}
           {% endfor %}
         </p>
 

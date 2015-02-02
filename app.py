@@ -129,7 +129,7 @@ admin = Admin(app, 'PiPLAY DB Interface', base_template='layout.html', template_
 #admin = Admin(app, base_template='base_admin.html')
 admin.add_view(CustomModelView(MenuItems, db.session))
 admin.add_view(CustomModelView(Options, db.session))
-admin.add_view(CustomModelView(KickstarterBackers, db.session))
+#admin.add_view(CustomModelView(KickstarterBackers, db.session))
 admin.add_view(CustomModelView(LocalRoms, db.session))
 
 ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip', 'smc', 
@@ -142,36 +142,38 @@ document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
 @app.route("/")
 def hello():
     name = "Hello World!"
-    document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
+    #document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
+    #data = yaml.load(document)
 
-    data = yaml.load(document)
-
-    return render_template('index.html', name=name, data=data)
+    return render_template('index.html', name=name)
 
 @app.route("/rom")
 def rom():
     name = "Hello World!"
-    document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
-
-    data = yaml.load(document)
-    print data
+    #document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
+    #data = yaml.load(document)
+    #print data
+    data = MenuItems.query.all()
     return render_template('list.html', name=name, data=data)
 
 @app.route("/system/<system_label>")
 def list_files(system_label):
     name = "Hello World!"
-    document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
-
-    data = yaml.load(document)
+    #document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
+    #data = yaml.load(document)
     system_data = 0
 
-    for d in data['menu_items']:
-    	print d['label']
-    	print system_label
-    	if d['label'] == system_label:
-    		system_data = d
+    # for d in data['menu_items']:
+    # 	print d['label']
+    # 	print system_label
+    # 	if d['label'] == system_label:
+    # 		system_data = d
 
-    roms = system_data['roms']
+    # roms = system_data['roms']
+    # data = MenuItems.query.all()
+
+    system_data = MenuItems.query.filter_by(label=system_label).first()
+    roms = system_data.rom_path
     print roms
 
     try:
@@ -186,17 +188,20 @@ def list_files(system_label):
 def upload_files(system_label):
     #return "hi"
     name = "Hello World!"
-    document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
-    data = yaml.load(document)
+    #document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
+    #data = yaml.load(document)
     system_data = 0
 
-    for d in data['menu_items']:
-        print d['label']
-        print system_label
-        if d['label'] == system_label:
-            system_data = d
+    # for d in data['menu_items']:
+    #     print d['label']
+    #     print system_label
+    #     if d['label'] == system_label:
+    #         system_data = d
 
-    roms = system_data['roms']
+    # roms = system_data['roms']
+
+    system_data = MenuItems.query.filter_by(label=system_label).first()
+    roms = system_data.rom_path
 
     if request.method == 'POST':
         file = request.files['file']
@@ -238,10 +243,11 @@ def power(power):
 @app.route("/ks")
 def kickstarter():
     name = "Kickstarter!"
-    document = open('/home/pi/pimame/pimame-menu/ks.yaml')
+    #document = open('/home/pi/pimame/pimame-menu/ks.yaml')
+    #data = yaml.load(document)
 
-    data = yaml.load(document)
-    print data
+    data = KickstarterBackers.query.all()
+    #print data
     return render_template('ks_list.html', name=name, data=data)
 
 
