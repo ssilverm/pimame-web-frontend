@@ -82,7 +82,7 @@ class Options(db.Model):
     sort_roms_by = db.Column(db.Text) 
     rom_sort_order = db.Column(db.Text) 
     filter_roms_by = db.Column(db.Text) 
-    change_log = db.Column(db.Text) 
+    #change_log = db.Column(db.Text) 
     first_run = db.Column(db.Integer)
 
     def __unicode__(self):
