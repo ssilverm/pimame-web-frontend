@@ -136,7 +136,7 @@ ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'zip', 'smc',
 		      'n64', 'gen', 'v64', 'bin', 'smd', 'SMC', 'GEN', 
 		      'BIN', 'SMD', 'gba', 'GBA', 'gb', 'GB', 'ZIP']
 
-document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
+#document = open('/home/pi/pimame/pimame-web-frontend/config.yaml')
 #print yaml.dump(yaml.load(document))
 
 @app.route("/")
