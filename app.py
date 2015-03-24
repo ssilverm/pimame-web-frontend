@@ -6,7 +6,6 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.admin import Admin
 from flask.ext.admin.contrib.sqla import ModelView
 
-
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
@@ -26,7 +25,7 @@ app.config['SECRET_KEY'] = 'jdhq7864r8uihblk'
 
 
 db = SQLAlchemy(app)
-
+db.create_scoped_session()
 
 
 class KickstarterBackers(db.Model):
